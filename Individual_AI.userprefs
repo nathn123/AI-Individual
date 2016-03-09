@@ -1,0 +1,21 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Controller.cs">
+    <Files>
+      <File FileName="Assets\Controller.cs" Line="63" Column="32" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\m2087350\Desktop\Individual_AI\Assets\Controller.cs" line="26" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="Assets\Controller.cs" line="35" offsetX="757" offsetY="578" expression="position" liveUpdate="False" />
+    <Watch file="Assets\Controller.cs" line="27" offsetX="768" offsetY="536" expression="centre" liveUpdate="False" />
+    <Watch file="Assets\Controller.cs" line="8" offsetX="770" offsetY="491" expression="Panels" liveUpdate="False" />
+    <Watch file="Assets\Controller.cs" line="40" offsetX="814" offsetY="655" expression="val" liveUpdate="False" />
+    <Watch file="Assets\Controller.cs" line="42" offsetX="878" offsetY="691" expression="UsedValues" liveUpdate="False" />
+    <Watch file="Assets\Controller.cs" line="42" offsetX="878" offsetY="717" expression="UsedValues._items" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+</Properties>
