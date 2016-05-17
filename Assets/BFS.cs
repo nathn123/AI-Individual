@@ -18,7 +18,7 @@ public class BFS : AIBase
 	
 	}
 
-    public override void Solve(List<List<GameObject>> StartSpace)
+    public override IEnumerator Solve(List<List<GameObject>> StartSpace)
     {
        CurSpace =  GetCurrentState(StartSpace);
        GoalSpace = GoalState(CurSpace);
@@ -30,15 +30,23 @@ public class BFS : AIBase
        BaseNode.depth = 0;
        BaseNode.cost = 0;
        PossibleNodes.Add(BaseNode);
-       do
-       {
-           //expand one node then test completion
-           var node = PossibleNodes[0];
-            PossibleNodes.Remove(node);
-            ExpandedNodes.Add(node);
-            PossibleNodes.AddRange(ExpandNode(node, ExpandedNodes.LastIndexOf(node)));
+       int count = 0;
+           do
+           {
+               //expand one node then test completion
+               var node = PossibleNodes[0];
+               PossibleNodes.Remove(node);
+               ExpandedNodes.Add(node);
+               PossibleNodes.AddRange(ExpandNode(node, ExpandedNodes.LastIndexOf(node)));
+               Debug.Log("count = " + count.ToString());
+               Debug.Log("ExpandedNodesCount = " + ExpandedNodes.Count.ToString());
+               count++;
+               //if (!HitGoal())
+                   
 
-       } while (!HitGoal());
+           } while (!HitGoal());
+
+               yield return null;
 
     }
     private List<Node> ExpandNode(Node CurNode, int parent)
@@ -145,16 +153,5 @@ public class BFS : AIBase
                 return NewNodes;
     }
 
-    private bool CheckDuplicates(Node NewNode, Node OldNode)
-    {
-            for (int j = 0; j < NewNode.State.Count;++j)
-            {
-                for (int k = 0; k < NewNode.State.Count; ++k)
-                {
-                    if (NewNode.State[j][k].Value != OldNode.State[j][k].Value)
-                       return false;
-                }
-            }
-     return true;
-    }
+
 }

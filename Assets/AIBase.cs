@@ -27,6 +27,7 @@ public abstract class AIBase  {
     }
     public List<List<PanelVal>> CurSpace, GoalSpace;
     public List<Node> PossibleNodes, ExpandedNodes;
+    public Node EndNode;
 	// Use this for initialization
 	void Start () {
 	
@@ -36,7 +37,7 @@ public abstract class AIBase  {
 	void Update () {
 	
 	}
-    public abstract void Solve(List<List<GameObject>> StartSpace);
+    public abstract IEnumerator Solve(List<List<GameObject>> StartSpace);
 
     public virtual List<List<PanelVal>> GetCurrentState(List<List<GameObject>> StartSpace)
     {
@@ -90,15 +91,45 @@ public abstract class AIBase  {
                     goal[height-1].Add(p);
         return goal;
     }
-
+    public virtual bool CheckDuplicates(Node NewNode, Node OldNode)
+    {
+        for (int j = 0; j < NewNode.State.Count; ++j)
+        {
+            for (int k = 0; k < NewNode.State.Count; ++k)
+            {
+                if (NewNode.State[j][k].Value != OldNode.State[j][k].Value)
+                    return false;
+            }
+        }
+        return true;
+    }
     public virtual bool HitGoal()
     {
+        Node Test = new Node();
+        Test.State = GoalSpace;
+        
         foreach(var CurNode in PossibleNodes)
-            if (CurNode.State == GoalSpace)
+            if (CheckDuplicates(CurNode, Test))
+            {
+                EndNode = CurNode;
                 return true;
+            }
         return false;
     }
 
+    public virtual List<Node> GetTheSequence()
+    {
+        List<Node> Solution = new List<Node>();
+
+        Solution.Add(EndNode);
+        do
+        {
+            Solution.Add(ExpandedNodes[Solution[Solution.Count - 1].Parent]);
+        } while (Solution[Solution.Count - 1].Parent == -1);
+
+        Solution.Reverse();
+        return Solution;
+    }
     public virtual Node CreateNode(Node CurNode,Vector2 cur,Vector2 next, int parent)
     {
         Node NewNode = new Node();
